@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="press_me">Нажми меня</string>
+</resources>
