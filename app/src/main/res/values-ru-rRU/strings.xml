@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Крестики нолики</string>
+    <string name="first_to_go">Кто ходит первый?</string>
+    <string name="O">Нолики</string>
+    <string name="X">Крестики</string>
+    <string name="x_won">Победили крестики!</string>
+    <string name="o_won">Победили нолики!</string>
+    <string name="no_winners">Ничья!</string>
+    <string name="about">О приложении</string>
+    <string name="author_name">Роман Воронин</string>
+    <string name="developer">Разработчик</string>
+</resources>

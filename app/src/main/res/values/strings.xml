@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Tic Tac Toe</string>
+    <string name="first_to_go">Who goes first?</string>
+    <string name="X">Crosses</string>
+    <string name="x_won">Crosses won!</string>
+    <string name="o_won">Zeroes won!</string>
+    <string name="no_winners">Draw</string>
+    <string name="O">Zeroes</string>
+    <string name="about">About</string>
+    <string name="author_nickname" translatable="false">deltaDelete</string>
+    <string name="author_name">Roman Voronin</string>
+    <string name="developer">Developer</string>
+    <string name="vk_link" translatable="false">https://vk.com/rosonoka</string>
+    <string name="github_link" translatable="false">https://github.com/deltadelete</string>
+</resources>
