@@ -4,10 +4,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.view.ContextThemeWrapper;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import java.util.Arrays;
 
@@ -17,15 +20,21 @@ public class GameManager {
     private final LinearLayout layout;
     private CellState[] board;
     private CellState _currentPlayer = CellState.X;
-    private Button[] buttons;
+    private ImageButton[] buttons;
+    private ColorStateList defaultColor;
+    private ColorStateList winColor;
+    private ColorStateList drawColor;
 
     public GameManager(int sideLength, Context context, LinearLayout layout) {
         this.sideLength = sideLength;
         this.context = context;
         this.layout = layout;
         board = new CellState[this.sideLength*this.sideLength];
-        buttons = new Button[this.sideLength*this.sideLength];
+        buttons = new ImageButton[this.sideLength*this.sideLength];
         Arrays.fill(board, CellState.EMPTY);
+        drawColor = context.getColorStateList(R.color.md_theme_dark_error);
+        winColor = context.getColorStateList(R.color.md_theme_dark_tertiary);
+        defaultColor = context.getColorStateList(R.color.md_theme_dark_primary);
     }
     public void fillBoard() {
         for (int i = 0; i < sideLength; i++) {
@@ -39,7 +48,7 @@ public class GameManager {
             row.setLayoutParams(params);
 
             for (int j = 0; j < sideLength; j++) {
-                Button btn = createButton(sideLength * i + j);
+                ImageButton btn = createButton(sideLength * i + j);
                 buttons[sideLength * i + j] = btn;
                 row.addView(btn);
             }
@@ -47,19 +56,25 @@ public class GameManager {
         }
     }
 
-    private Button createButton(int index) {
+    private ImageButton createButton(int index) {
         final float scale = context.getResources().getDisplayMetrics().density;
         int pixels = (int) (100 * scale + 0.5f);
-        Button btn = new Button(context);
-        btn.setWidth(pixels);
-        btn.setHeight(pixels);
+        int padding = (int) (10 * scale + 0.5f);
+        ImageButton btn = new ImageButton(new ContextThemeWrapper(context, R.style.Theme_AppTheme));
+//        btn.setPadding(padding, padding, padding, padding);
+        btn.setMaxWidth(pixels);
+        btn.setMaxHeight(pixels);
+        btn.setMinimumWidth(pixels);
+        btn.setMinimumHeight(pixels);
+        btn.setBackground(AppCompatResources.getDrawable(context, R.drawable.baseline_circle_24));
+        btn.setBackgroundTintList(defaultColor);
 
         btn.setOnClickListener((view) -> {
             if (board[index] == CellState.EMPTY) {
                 board[index] = _currentPlayer;
                 _currentPlayer = _currentPlayer == CellState.X ? CellState.O : CellState.X;
             }
-            btn.setCompoundDrawablesWithIntrinsicBounds(board[index].toIcon(context), null, null, null);
+            btn.setImageDrawable(board[index].toIcon(context));
             btn.setEnabled(false);
             checkWin();
         });
@@ -82,13 +97,13 @@ public class GameManager {
                 // победа
                 String title = context.getResources().getString(R.string.x_won);
                 Arrays.stream(winCombination).forEach(i -> {
-                    buttons[i].setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    buttons[i].setBackgroundTintList(winColor);
                 });
                 winDialog(title);
             } else if (oCount == sideLength) {
                 // победа
                 Arrays.stream(winCombination).forEach(i -> {
-                    buttons[i].setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    buttons[i].setBackgroundTintList(winColor);
                 });
                 winDialog(context.getResources().getString(R.string.o_won));
             }
@@ -96,7 +111,7 @@ public class GameManager {
         if (Arrays.stream(board).allMatch(it -> it != CellState.EMPTY)) {
             // ничья
             Arrays.stream(buttons).forEach(it -> {
-                it.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
+                it.setBackgroundTintList(drawColor);
             });
             winDialog(context.getResources().getString(R.string.friendship_won));
         }
