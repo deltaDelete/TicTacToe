@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">TicTacToe</string>
-    <string name="enter_text">Введите текст</string>
-    <string name="press_me">Нажми меня</string>
+    <string name="press_me">Press me</string>
+    <string name="x_won">Crosses won!</string>
+    <string name="enter_text">Enter text</string>
+    <string name="o_won">Zeroes won!</string>
+    <string name="friendship_won">Draw</string>
+    <string name="play_again">Play again</string>
+    <string name="choose_side">Choose your side</string>
+    <string name="ok">Ok</string>
 </resources>

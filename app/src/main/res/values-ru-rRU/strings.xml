@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TicTacToe</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="press_me">Нажми меня</string>
+    <string name="x_won">Победили крестики!</string>
+    <string name="o_won">Победили нолики!</string>
+    <string name="friendship_won">Ничья!</string>
+    <string name="play_again">Играть снова</string>
+    <string name="choose_side">Выберите сторону</string>
+    <string name="ok">Ок</string>
+</resources>

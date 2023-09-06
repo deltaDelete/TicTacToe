@@ -12,19 +12,27 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout layout;
-    private CellState[][] cells = new CellState[3][3];
+    public GameManager gm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        layout = findViewById(R.id.field);
+        layout = findViewById(R.id.board);
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                cells[i][j] = CellState.EMPTY;
+        gm = new GameManagerBuilder()
+                .setSideLength(3)
+//                .setContext(this.getBaseContext())
+                .setContext(this)
+                .setLayout(layout)
+                .createGameManager();
 
-            }
-        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+//        gm.selectPlaya();
+        gm.fillBoard();
     }
 }
