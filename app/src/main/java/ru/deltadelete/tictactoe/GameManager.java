@@ -2,17 +2,12 @@ package ru.deltadelete.tictactoe;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.ContextThemeWrapper;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import androidx.appcompat.content.res.AppCompatResources;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
