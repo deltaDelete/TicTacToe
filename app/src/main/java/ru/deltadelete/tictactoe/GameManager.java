@@ -137,12 +137,16 @@ public class GameManager {
                 .setPositiveButton(context.getString(R.string.play_again), (dialog, id) -> {
                 })
                 .setOnDismissListener((dialog -> {
-                    Arrays.fill(board, CellState.EMPTY);
-                    layout.removeAllViews();
-                    this.selectPlayerDialog().show();
+                    restart();
                 }))
                 .create()
                 .show();
+    }
+
+    private void restart() {
+        Arrays.fill(board, CellState.EMPTY);
+        layout.removeAllViews();
+        this.selectPlayerDialog().show();
     }
 
     public AlertDialog selectPlayerDialog() {
