@@ -57,9 +57,7 @@ public class GameManager {
     private ImageButton createButton(int index) {
         final float scale = context.getResources().getDisplayMetrics().density;
         int pixels = (int) (100 * scale + 0.5f);
-        int padding = (int) (10 * scale + 0.5f);
         ImageButton btn = new ImageButton(new ContextThemeWrapper(context, R.style.Theme_AppTheme));
-//        btn.setPadding(padding, padding, padding, padding);
         btn.setMaxWidth(pixels);
         btn.setMaxHeight(pixels);
         btn.setMinimumWidth(pixels);
@@ -138,7 +136,7 @@ public class GameManager {
                 .show();
     }
 
-    private void restart() {
+    public void restart() {
         Arrays.fill(board, CellState.EMPTY);
         layout.removeAllViews();
         this.selectPlayerDialog().show();

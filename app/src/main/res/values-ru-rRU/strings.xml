@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="action_restart">Начать заново</string>
     <string name="app_name">Крестики нолики</string>
     <string name="enter_text">Введите текст</string>
     <string name="press_me">Нажми меня</string>
