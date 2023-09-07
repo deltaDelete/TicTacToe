@@ -9,4 +9,6 @@
     <string name="play_again">Играть снова</string>
     <string name="choose_side">Выберите сторону</string>
     <string name="ok">Ок</string>
+    <string name="o">Нолики</string>
+    <string name="x">Крестики</string>
 </resources>

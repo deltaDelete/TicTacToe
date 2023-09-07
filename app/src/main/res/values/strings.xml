@@ -8,4 +8,6 @@
     <string name="play_again">Play again</string>
     <string name="choose_side">Choose your side</string>
     <string name="ok">OK</string>
+    <string name="o">Zeroes</string>
+    <string name="x">Crosses</string>
 </resources>

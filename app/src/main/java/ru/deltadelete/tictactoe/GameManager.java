@@ -2,6 +2,7 @@ package ru.deltadelete.tictactoe;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.ContextThemeWrapper;
@@ -11,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import androidx.appcompat.content.res.AppCompatResources;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -29,13 +31,14 @@ public class GameManager {
         this.sideLength = sideLength;
         this.context = context;
         this.layout = layout;
-        board = new CellState[this.sideLength*this.sideLength];
-        buttons = new ImageButton[this.sideLength*this.sideLength];
+        board = new CellState[this.sideLength * this.sideLength];
+        buttons = new ImageButton[this.sideLength * this.sideLength];
         Arrays.fill(board, CellState.EMPTY);
         drawColor = context.getColorStateList(R.color.md_theme_dark_error);
         winColor = context.getColorStateList(R.color.md_theme_dark_tertiary);
         defaultColor = context.getColorStateList(R.color.md_theme_dark_primary);
     }
+
     public void fillBoard() {
         for (int i = 0; i < sideLength; i++) {
             LinearLayout row = new LinearLayout(context);
@@ -118,36 +121,44 @@ public class GameManager {
     }
 
     final int[][] winCombinations = new int[][]{
-            new int[] {0, 1, 2},
-            new int[] {3, 4, 5},
-            new int[] {6, 7, 8},
-            new int[] {0, 4, 8},
-            new int[] {2, 4, 6},
-            new int[] {0, 3, 6},
-            new int[] {1, 4, 7},
-            new int[] {2, 5, 8},
+            new int[]{0, 1, 2},
+            new int[]{3, 4, 5},
+            new int[]{6, 7, 8},
+            new int[]{0, 4, 8},
+            new int[]{2, 4, 6},
+            new int[]{0, 3, 6},
+            new int[]{1, 4, 7},
+            new int[]{2, 5, 8},
     };
 
     private void winDialog(String title) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
-                .setPositiveButton(context.getString(R.string.play_again), (dialog, id) -> {})
+                .setPositiveButton(context.getString(R.string.play_again), (dialog, id) -> {
+                })
                 .setOnDismissListener((dialog -> {
                     Arrays.fill(board, CellState.EMPTY);
                     layout.removeAllViews();
-                    fillBoard();
+                    this.selectPlayerDialog().show();
                 }))
                 .create()
                 .show();
     }
 
-    public void selectPlayer() {
-       CellState[] sides =  new CellState[] {CellState.X, CellState.O};
-        new AlertDialog.Builder(context)
-                .setTitle(R.string.choose_side)
-                .setPositiveButton(R.string.ok, (dialog, player) -> {})
-                .setSingleChoiceItems((ListAdapter) Arrays.stream(sides).map(Enum::toString), 0, (dialog, which) -> _currentPlayer = sides[which])
-                .create()
-                .show();
+    public AlertDialog selectPlayerDialog() {
+        final CellState[] sides = new CellState[]{CellState.X, CellState.O};
+        final CharSequence[] sidesStrings = {context.getString(R.string.x), context.getString(R.string.o)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(R.string.choose_side);
+        builder.setOnDismissListener(dialog -> {
+            this.fillBoard();
+        });
+        builder.setSingleChoiceItems(sidesStrings, 0, (dialog, which) -> {
+            _currentPlayer = sides[which];
+        });
+        builder.setPositiveButton(R.string.ok, (dialog, player) -> {
+        });
+        return builder
+                .create();
     }
 }

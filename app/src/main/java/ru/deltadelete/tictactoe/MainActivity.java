@@ -1,6 +1,7 @@
 package ru.deltadelete.tictactoe;
 
 import android.widget.LinearLayout;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ public class MainActivity extends AppCompatActivity {
 
     private LinearLayout layout;
     public GameManager gm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
                 .setLayout(layout)
                 .createGameManager();
 
+        gm.selectPlayerDialog().show();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        gm.fillBoard();
     }
 }
